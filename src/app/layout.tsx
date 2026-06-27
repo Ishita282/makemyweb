@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -16,19 +17,38 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://makemyweb.com"),
+
   title: {
     default: "MakeMyWeb",
     template: "%s | MakeMyWeb",
   },
+
   description:
-    "Premium websites, web applications, AI integration, eCommerce and digital growth.",
+    "Premium websites, web applications, AI solutions, eCommerce, SEO and digital marketing.",
+
+  keywords: [
+    "Website Development",
+    "Web Applications",
+    "AI Integration",
+    "SEO",
+    "Digital Agency",
+    "MakeMyWeb",
+  ],
+
+  authors: [
+    {
+      name: "MakeMyWeb",
+    },
+  ],
 };
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: RootLayoutProps) {
   return (
     <html
       lang="en"
