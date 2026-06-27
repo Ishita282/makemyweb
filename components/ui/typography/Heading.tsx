@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { ElementType } from "react";
 
 const headingVariants = cva(
   "font-heading tracking-tight text-slate-900",
@@ -24,7 +25,7 @@ const headingVariants = cva(
 interface HeadingProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof headingVariants> {
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
 }
 
 export function Heading({
