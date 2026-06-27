@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="py-28 lg:py-36">
       <Container>
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto flex max-w-4xl flex-col items-center">
           <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
             🚀 Premium Digital Growth Agency
           </span>

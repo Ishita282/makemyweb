@@ -36,7 +36,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial) => (
             <Card key={testimonial.name}>
               <p className="text-slate-600">
-                "{testimonial.review}"
+                {testimonial.review}
               </p>
 
               <div className="mt-8">

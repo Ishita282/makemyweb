@@ -1,3 +1,78 @@
-git add .
+@import "tailwindcss";
 
-git commit -m "feat: build initial application foundation"
+/* =========================
+   Global Styles
+========================= */
+
+:root {
+  /* Colors */
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  --secondary: #f8fafc;
+  --border: #e2e8f0;
+
+  --muted: #64748b;
+
+  /* Radius */
+  --radius: 1rem;
+
+  /* Shadow */
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  /* Container */
+  --container-width: 1280px;
+}
+
+/* =========================
+   Reset
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
