@@ -3,34 +3,36 @@ import { Inter, Manrope } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const manrope = Manrope({
+const headingFont = Manrope({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://makemyweb.com"),
-
   title: {
     default: "MakeMyWeb",
     template: "%s | MakeMyWeb",
   },
 
   description:
-    "Premium websites, web applications, AI solutions, eCommerce, SEO and digital marketing.",
+    "MakeMyWeb builds premium websites, web applications, AI-powered solutions, eCommerce stores, and digital experiences for businesses worldwide.",
 
   keywords: [
     "Website Development",
+    "Web Development",
     "Web Applications",
     "AI Integration",
+    "E-commerce",
     "SEO",
+    "Google Ads",
+    "Meta Ads",
     "Digital Agency",
     "MakeMyWeb",
   ],
@@ -50,12 +52,9 @@ export default function RootLayout({
   children,
 }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang="en">
       <body
-        className={`${inter.variable} ${manrope.variable}`}
+        className={`${bodyFont.variable} ${headingFont.variable}`}
       >
         {children}
       </body>
