@@ -1,22 +1,22 @@
 import { cn } from "@/lib/utils";
 
-interface ContainerProps {
+interface SectionProps {
   children: React.ReactNode;
   className?: string;
 }
 
-export function Container({
+export function Section({
   children,
   className,
-}: ContainerProps) {
+}: SectionProps) {
   return (
-    <div
+    <section
       className={cn(
-        "mx-auto w-full max-w-[1280px] px-6 lg:px-8",
+        "py-20 lg:py-28",
         className
       )}
     >
       {children}
-    </div>
+    </section>
   );
 }
