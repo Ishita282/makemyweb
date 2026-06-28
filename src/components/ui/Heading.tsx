@@ -11,15 +11,10 @@ export default function Heading({
   level = 2,
   className = "",
 }: HeadingProps) {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+  const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
   return (
-    <Tag
-      className={`font-bold tracking-tight text-slate-900 ${className}`}
-      style={{
-        fontFamily: "var(--font-heading)",
-      }}
-    >
+    <Tag className={`font-bold tracking-tight text-slate-900 ${className}`}>
       {children}
     </Tag>
   );

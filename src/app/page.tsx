@@ -1,11 +1,13 @@
 import { Footer, Navbar } from "@/src/components/layout";
 import {
   CTA,
+  FAQ,
   Hero,
   Process,
   Projects,
   Services,
   Testimonials,
+  WhyUs,
 } from "@/src/components/sections";
 
 export default function HomePage() {
@@ -16,9 +18,11 @@ export default function HomePage() {
       <main>
         <Hero />
         <Services />
-        <Process />
         <Projects />
+        <WhyUs />
+        <Process />
         <Testimonials />
+        <FAQ />
         <CTA />
       </main>
 
