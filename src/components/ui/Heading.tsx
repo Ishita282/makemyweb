@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import React from 'react';
 
 interface HeadingProps {
-  children: ReactNode;
-  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  children: React.ReactNode;
+  level?: 1 | 2 | 3 | 4;
   className?: string;
 }
 
@@ -11,10 +11,17 @@ export default function Heading({
   level = 2,
   className = "",
 }: HeadingProps) {
-  const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
+
+  const styles = {
+    1: "text-5xl md:text-6xl lg:text-7xl font-extrabold",
+    2: "text-4xl md:text-5xl font-bold",
+    3: "text-2xl font-semibold",
+    4: "text-xl font-semibold",
+  };
 
   return (
-    <Tag className={`font-bold tracking-tight text-slate-900 ${className}`}>
+    <Tag className={`${styles[level]} text-slate-900 ${className}`}>
       {children}
     </Tag>
   );

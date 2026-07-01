@@ -2,30 +2,38 @@ import Badge from "./Badge";
 import Heading from "./Heading";
 import Text from "./Text";
 
-interface SectionTitleProps {
+interface Props {
   badge?: string;
   title: string;
   description?: string;
+  align?: "left" | "center";
 }
 
 export default function SectionTitle({
   badge,
   title,
   description,
-}: SectionTitleProps) {
+  align = "center",
+}: Props) {
   return (
-    <div className="mx-auto mb-16 max-w-3xl text-center">
+    <div
+      className={`mb-16 max-w-3xl ${
+        align === "center"
+          ? "mx-auto text-center"
+          : ""
+      }`}
+    >
       {badge && <Badge>{badge}</Badge>}
 
       <Heading
         level={2}
-        className="mt-5 text-4xl md:text-5xl"
+        className="mt-5"
       >
         {title}
       </Heading>
 
       {description && (
-        <Text className="mt-5 text-lg">
+        <Text className="mt-5">
           {description}
         </Text>
       )}

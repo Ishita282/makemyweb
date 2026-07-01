@@ -1,62 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
-
 import "./globals.css";
 
-const bodyFont = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const headingFont = Manrope({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
+import { Navbar, Footer } from "@/src/components/layout";
 
 export const metadata: Metadata = {
-  title: {
-    default: "MakeMyWeb",
-    template: "%s | MakeMyWeb",
-  },
-
-  description:
-    "MakeMyWeb builds premium websites, web applications, AI-powered solutions, eCommerce stores, and digital experiences for businesses worldwide.",
-
-  keywords: [
-    "Website Development",
-    "Web Development",
-    "Web Applications",
-    "AI Integration",
-    "E-commerce",
-    "SEO",
-    "Google Ads",
-    "Meta Ads",
-    "Digital Agency",
-    "MakeMyWeb",
-  ],
-
-  authors: [
-    {
-      name: "MakeMyWeb",
-    },
-  ],
+  title: "MakeMyWeb",
+  description: "Premium Digital Agency",
 };
-
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
 
 export default function RootLayout({
   children,
-}: RootLayoutProps) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body
-        className={`${bodyFont.variable} ${headingFont.variable}`}
-      >
-        {children}
+      <body>
+
+        <Navbar />
+
+        <main>{children}</main>
+
+        <Footer />
       </body>
     </html>
   );

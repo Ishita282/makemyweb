@@ -1,4 +1,3 @@
-import { Footer, Navbar } from "@/src/components/layout";
 import {
   CTA,
   FAQ,
@@ -8,16 +7,17 @@ import {
   Services,
   Testimonials,
   WhyUs,
+  Skills,
 } from "@/src/components/sections";
 
 export default function HomePage() {
   return (
     <>
-      <Navbar />
 
       <main>
         <Hero />
         <Services />
+        <Skills />
         <Projects />
         <WhyUs />
         <Process />
@@ -26,7 +26,6 @@ export default function HomePage() {
         <CTA />
       </main>
 
-      <Footer />
     </>
   );
 }

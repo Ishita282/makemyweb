@@ -1,45 +1,20 @@
-import { Container, Footer, Navbar } from "@/src/components/layout";
-import { Card, Heading } from "@/src/components/ui";
-
-const services = [
-  "Website Development",
-  "Web Applications",
-  "Mobile Apps",
-  "AI Integration",
-  "E-Commerce",
-  "WordPress Development",
-  "SEO",
-  "Google Ads",
-  "Meta Ads",
-  "Graphic Design",
-];
+import {
+  Services,
+  CTA,
+} from "@/src/components/sections";
 
 export const metadata = {
-  title: "Services",
+  title: "Services | MakeMyWeb",
+  description:
+    "Explore our web development, AI, mobile app, and digital services.",
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <Navbar />
+      <Services />
 
-      <main className="py-20">
-        <Container>
-          <Heading level={1} className="text-center text-5xl">
-            Our Services
-          </Heading>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <Card key={service}>
-                <h3 className="text-xl font-semibold">{service}</h3>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </main>
-
-      <Footer />
+      <CTA />
     </>
   );
 }

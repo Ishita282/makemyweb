@@ -1,54 +1,59 @@
-import { Container, Footer, Navbar } from "@/src/components/layout";
-import { Button, Heading, Text } from "@/src/components/ui";
+import { TiltCard } from "@/src/components/effects";
+import {
+  Section,
+  SectionTitle,
+  Input,
+  Textarea,
+  Button,
+  Card,
+} from "@/src/components/ui";
 
 export const metadata = {
-  title: "Contact",
+  title: "Contact | MakeMyWeb",
+  description: "Get in touch with MakeMyWeb to discuss your next project.",
 };
 
 export default function ContactPage() {
   return (
-    <>
-      <Navbar />
+    <Section>
+      <SectionTitle
+        badge="Contact"
+        title="Let's Build Something Amazing"
+        description="Tell us about your project and we'll get back to you shortly."
+      />
 
-      <main className="py-20">
-        <Container>
-          <div className="mx-auto max-w-2xl">
-            <Heading level={1} className="text-center text-5xl">
-              Let&apos;s Build Something Amazing
-            </Heading>
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
+        <TiltCard>
+          <Card>
+            <form className="space-y-6">
+              <Input placeholder="Your Name" />
 
-            <Text className="mt-6 text-center">
-              Tell us about your project and we&apos;ll get back to you shortly.
-            </Text>
+              <Input type="email" placeholder="Email Address" />
 
-            <form className="mt-12 space-y-6">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-              />
+              <Input placeholder="Company" />
 
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-              />
-
-              <textarea
-                rows={6}
-                placeholder="Tell us about your project..."
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600"
-              />
-
-              <Button type="submit">
-                Send Message
-              </Button>
+              <Textarea placeholder="Tell us about your project..." />
+                <Button>Send Message</Button>
             </form>
-          </div>
-        </Container>
-      </main>
+          </Card>
+        </TiltCard>
 
-      <Footer />
-    </>
+        <TiltCard>
+          <Card>
+            <h3 className="text-2xl font-bold">Contact Information</h3>
+
+            <div className="mt-8 space-y-5 text-slate-600">
+              <p>📧 hello@makemyweb.com</p>
+
+              <p>🌍 Worldwide Remote</p>
+
+              <p>⏰ Monday &ndash; Saturday</p>
+
+              <p>⚡ Usually responds within 24 hours</p>
+            </div>
+          </Card>
+        </TiltCard>
+      </div>
+    </Section>
   );
 }
