@@ -29,7 +29,7 @@ export default function CTA() {
 
         {/* Heading */}
 
-        <h2 className="mx-auto mt-8 max-w-4xl text-4xl font-black leading-tight text-white md:text-6xl">
+        <h2 className="mx-auto mt-8 max-w-4xl text-4xl text-center font-black leading-tight text-white md:text-6xl">
           Ready To Grow
           <br />
           Your Business Online?
@@ -37,7 +37,7 @@ export default function CTA() {
 
         {/* Description */}
 
-        <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-blue-100">
+        <p className="mx-auto mt-8 max-w-2xl text-center text-lg leading-8 text-blue-100">
           Whether you need a premium website, a custom web application, AI
           automation, or a complete digital solution, we&apos;re ready to help.
         </p>
@@ -72,7 +72,7 @@ export default function CTA() {
 
         {/* Bottom Stats */}
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-3 justify-center text-center">
           <div>
             <h3 className="text-4xl font-black text-white">50+</h3>
 

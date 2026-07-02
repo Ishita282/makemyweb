@@ -1,30 +1,26 @@
 "use client";
 
-import Image from "next/image";
 import { Quote, Star } from "lucide-react";
 
 import { Card, Section, SectionTitle } from "@/src/components/ui";
-import { Reveal } from "@/src/components/effects";
+import { Marquee, Reveal } from "@/src/components/effects";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Muskan Joshi",
     role: "CEO, BrightTech",
-    image: "/images/avatar-1.webp",
     review:
       "The team delivered a beautiful website that exceeded our expectations. Communication was smooth and the final product significantly improved our online presence.",
   },
   {
-    name: "Michael Brown",
+    name: "Gaurav Sharma",
     role: "Founder, Nova Studio",
-    image: "/images/avatar-2.webp",
     review:
       "Professional, fast, and incredibly talented. They transformed our idea into a modern web application that our clients love using every day.",
   },
   {
-    name: "Emily Davis",
+    name: "Ananya Verma",
     role: "Marketing Manager",
-    image: "/images/avatar-3.webp",
     review:
       "From design to launch, everything was handled perfectly. We noticed better engagement and more customer inquiries within weeks.",
   },
@@ -39,14 +35,15 @@ export default function Testimonials() {
         description="We're proud to help businesses launch, grow, and succeed with modern digital solutions."
       />
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        {testimonials.map((item, index) => (
-          <Reveal
-            key={item.name}
+      <Reveal>
+        <Marquee duration={20}>
+          {testimonials.map((item, index) => (
+            <Card
+              key={`${item.name}-${index}`}
+              className="group relative w-[380px] flex-shrink-0"
             >
-            <Card className="group relative h-full">
               {/* Quote Icon */}
-              <div className="absolute right-6 top-6 text-blue-100 transition group-hover:scale-110">
+              <div className="absolute right-6 top-6 text-blue-100 transition-transform duration-300 group-hover:scale-110">
                 <Quote size={42} />
               </div>
 
@@ -65,25 +62,15 @@ export default function Testimonials() {
               <p className="leading-8 text-slate-600">{item.review}</p>
 
               {/* Author */}
-              <div className="mt-8 flex items-center gap-4">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={64}
-                  height={64}
-                  className="rounded-full object-cover ring-2 ring-blue-100"
-                />
+              <div className="mt-8">
+                <h3 className="font-semibold text-slate-900">{item.name}</h3>
 
-                <div>
-                  <h3 className="font-semibold text-slate-900">{item.name}</h3>
-
-                  <p className="text-sm text-slate-500">{item.role}</p>
-                </div>
+                <p className="text-sm text-slate-500">{item.role}</p>
               </div>
             </Card>
-          </Reveal>
-        ))}
-      </div>
+          ))}
+        </Marquee>
+      </Reveal>
     </Section>
   );
 }

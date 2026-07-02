@@ -9,12 +9,13 @@ import {
   WhyUs,
   Skills,
 } from "@/src/components/sections";
+import {CursorSpotlight} from "@/src/components/effects";
 
 export default function HomePage() {
   return (
     <>
-
       <main>
+        <CursorSpotlight />
         <Hero />
         <Services />
         <Skills />
@@ -25,7 +26,6 @@ export default function HomePage() {
         <FAQ />
         <CTA />
       </main>
-
     </>
   );
 }

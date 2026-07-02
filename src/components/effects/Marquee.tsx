@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface MarqueeProps {
-  children: ReactNode[];
+  children: ReactNode;
   duration?: number;
 }
 
@@ -15,19 +15,23 @@ export default function Marquee({
   return (
     <div className="overflow-hidden">
       <motion.div
-        className="flex w-max gap-8"
-        animate={{
-          x: ["0%", "-50%"],
-        }}
+        className="flex w-max"
+        animate={{ x: ["0%", "-50%"] }}
         transition={{
           duration,
           ease: "linear",
           repeat: Infinity,
         }}
       >
-        {[...children, ...children].map((item, index) => (
-          <div key={index}>{item}</div>
-        ))}
+        {/* First Row */}
+        <div className="flex gap-8 pr-8">
+          {children}
+        </div>
+
+        {/* Duplicate Row */}
+        <div className="flex gap-8">
+          {children}
+        </div>
       </motion.div>
     </div>
   );

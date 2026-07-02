@@ -84,7 +84,7 @@ export default function Process() {
                   </div>
 
                   {/* Timeline Dot */}
-                  <div className="absolute top-10 hidden h-5 w-5 rounded-full border-4 border-white bg-blue-600 lg:block
+                  <div className="absolute top-10 hidden h-4 w-4 rounded-full border-3 border-white bg-blue-800 lg:block
                     ${
                       isLeft
                         ? '-right-[52px]'

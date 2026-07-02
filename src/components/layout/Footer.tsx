@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import Image from "next/image";
+
 import Container from "./Container";
 
 const services = [
@@ -23,9 +25,21 @@ export default function Footer() {
         <div className="grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold">
-              Make<span className="text-blue-500">MyWeb</span>
-            </h3>
+           <Link href="/" className="flex flex-col items-center">
+            <Image
+              src="/images/logo.webp"
+              alt="MakeMyWeb Logo"
+              width={56}
+              height={56}
+              priority
+              className="h-14 w-14 object-contain bg-white rounded m-2"
+            />
+
+            <span className="-mt-2 text-base font-bold leading-none tracking-tight">
+              <span className="text-blue-600">Make</span>
+              <span className="text-white-900">MyWeb</span>
+            </span>
+          </Link>
 
             <p className="mt-5 leading-7 text-slate-400">
               Premium websites, AI solutions, mobile apps,

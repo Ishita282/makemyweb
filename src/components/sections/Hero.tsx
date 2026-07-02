@@ -10,7 +10,6 @@ import {
   FloatingBadge,
   Magnetic,
   NoiseBackground,
-  Spotlight,
   Shine,
 } from "@/src/components/effects";
 
@@ -25,7 +24,6 @@ const features = [
 export default function Hero() {
   return (
     <Section className="relative overflow-hidden pt-20">
-      <Spotlight />
 
       {/* Background */}
 

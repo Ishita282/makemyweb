@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
+import Image from "next/image";
+
 import Container from "./Container";
 import { Button } from "@/src/components/ui";
 import { Magnetic } from "@/src/components/effects";
@@ -21,9 +23,20 @@ export default function Navbar() {
       <Container>
         <nav className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold tracking-tight">
-            <span className="text-blue-600">Make</span>
-            <span className="text-slate-900">MyWeb</span>
+          <Link href="/" className="flex flex-col items-center">
+            <Image
+              src="/images/logo.webp"
+              alt="MakeMyWeb Logo"
+              width={56}
+              height={56}
+              priority
+              className="h-14 w-14 object-contain"
+            />
+
+            <span className="-mt-2 text-base font-bold leading-none tracking-tight">
+              <span className="text-blue-600">Make</span>
+              <span className="text-slate-900">MyWeb</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -42,22 +55,19 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden lg:block">
             <Magnetic>
-            <Button href="/contact">
-              Start Project
-            </Button>
+              <Button href="/contact">Start Project</Button>
             </Magnetic>
           </div>
 
           {/* Mobile Button */}
           <Magnetic>
             <button
-            className="rounded-xl border border-slate-200 p-2 lg:hidden"
-            aria-label="Open navigation menu"
-          >
-            <Menu size={22} />
-          </button>
+              className="rounded-xl border border-slate-200 p-2 lg:hidden"
+              aria-label="Open navigation menu"
+            >
+              <Menu size={22} />
+            </button>
           </Magnetic>
-
         </nav>
       </Container>
     </header>

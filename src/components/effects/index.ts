@@ -7,5 +7,5 @@ export { default as Magnetic } from "./Magnetic";
 export { default as TiltCard } from "./TiltCard";
 export { default as NoiseBackground } from "./NoiseBackground";
 export { default as Shine } from "./Shine";
-export { default as Spotlight } from "./Spotlight";
 export { default as Marquee } from "./Marquee";
+export { default as CursorSpotlight } from "./CursorSpotlight";

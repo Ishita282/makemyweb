@@ -3,8 +3,7 @@
 import { Bot, Globe, Rocket, ShieldCheck } from "lucide-react";
 
 import { Card, Section, SectionTitle } from "@/src/components/ui";
-
-import { Reveal } from "@/src/components/effects";
+import { Marquee, Reveal } from "@/src/components/effects";
 
 const features = [
   {
@@ -29,37 +28,57 @@ const features = [
   },
 ];
 
+function FeatureCard({
+  feature,
+}: {
+  feature: (typeof features)[number];
+}) {
+  const Icon = feature.icon;
+
+  return (
+    <Card className="group mx-4 w-[340px] flex-shrink-0 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 transition-transform duration-300 group-hover:scale-110">
+        <Icon size={28} className="text-blue-600" />
+      </div>
+
+      <h3 className="text-xl font-semibold text-slate-900">
+        {feature.title}
+      </h3>
+
+      <p className="mt-4 leading-7 text-slate-600">
+        {feature.description}
+      </p>
+    </Card>
+  );
+}
+
 export default function WhyUs() {
   return (
-    <Section className="bg-slate-50">
-      <SectionTitle
-        badge="Why Choose Us"
-        title="Everything You Need to Grow Online"
-        description="We combine design, development, AI, and marketing to help businesses create modern digital experiences."
-      />
+    <Section className="overflow-hidden bg-slate-50">
+      <Reveal>
+        <SectionTitle
+          badge="Why Choose Us"
+          title="Everything You Need to Grow Online"
+          description="We combine design, development, AI, and marketing to help businesses create modern digital experiences."
+        />
+      </Reveal>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {features.map((feature, index) => {
-          const Icon = feature.icon;
+      <div className="space-y-6">
+        <Marquee>
+          {features.map((feature) => (
+            <FeatureCard
+              key={feature.title}
+              feature={feature}
+            />
+          ))}
 
-          return (
-            <Reveal key={feature.title}>
-              <Card className="h-full">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100">
-                  <Icon size={28} className="text-blue-600" />
-                </div>
-
-                <h3 className="text-xl font-semibold text-slate-900">
-                  {feature.title}
-                </h3>
-
-                <p className="mt-4 text-slate-600 leading-7">
-                  {feature.description}
-                </p>
-              </Card>
-            </Reveal>
-          );
-        })}
+          {features.map((feature) => (
+            <FeatureCard
+              key={`${feature.title}-duplicate`}
+              feature={feature}
+            />
+          ))}
+        </Marquee>
       </div>
     </Section>
   );
