@@ -17,7 +17,7 @@ export default function HomePage() {
       <main>
         <CursorSpotlight />
         <Hero />
-        <Services />
+        <Services limit={6} />
         <Skills />
         <Projects />
         <WhyUs />

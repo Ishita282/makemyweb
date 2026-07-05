@@ -7,3 +7,5 @@ export { default as CTA } from "./CTA";
 export { default as WhyUs } from "./WhyUs";
 export { default as FAQ } from "./FAQ";
 export { default as Skills } from "./Skills";
+
+export { StartProjectModal } from "./StartProjectModal"; 

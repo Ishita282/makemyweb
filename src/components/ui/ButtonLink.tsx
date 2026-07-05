@@ -1,20 +1,21 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import Link from "next/link";
+import { ReactNode } from "react";
 
-interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonLinkProps {
   children: ReactNode;
+  href: string;
   variant?: "primary" | "secondary" | "outline";
   size?: "sm" | "md" | "lg";
   className?: string;
 }
 
-export default function Button({
+export default function ButtonLink({
   children,
+  href,
   variant = "primary",
   size = "md",
   className = "",
-  ...props
-}: ButtonProps) {
+}: ButtonLinkProps) {
   const variants = {
     primary:
       "bg-blue-600 text-white hover:bg-blue-700",
@@ -31,11 +32,11 @@ export default function Button({
   };
 
   return (
-    <button
-      className={`inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`}
-      {...props}
+    <Link
+      href={href}
+      className={`inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${variants[variant]} ${sizes[size]} ${className}`}
     >
       {children}
-    </button>
+    </Link>
   );
 }

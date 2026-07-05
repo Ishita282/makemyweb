@@ -7,3 +7,5 @@ export { default as Section } from "./Section";
 export { default as SectionTitle } from "./SectionTitle";
 export { default as Text } from "./Text";
 export { default as Textarea } from "./Textarea";
+export { default as ButtonLink } from "./ButtonLink";
+

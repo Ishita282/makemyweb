@@ -1,16 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { Menu } from "lucide-react";
+import { useState } from "react";
 
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
 
 import Container from "./Container";
 import { Button } from "@/src/components/ui";
 import { Magnetic } from "@/src/components/effects";
+import { StartProjectModal } from "@/src/components/sections";
 
 const links = [
-  { label: "Home", href: "/" },
+  { label: "Home", href: "/#hero" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
@@ -18,12 +21,31 @@ const links = [
 ];
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  function handleHeroClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    // If already on the homepage, scroll manually every time.
+    if (pathname === "/") {
+      e.preventDefault();
+
+      document.getElementById("hero")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl">
       <Container>
         <nav className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-center">
+          <Link
+            href="/#hero"
+            onClick={handleHeroClick}
+            className="flex flex-col items-center"
+          >
             <Image
               src="/images/logo.webp"
               alt="MakeMyWeb Logo"
@@ -41,23 +63,35 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 lg:flex">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-medium text-slate-600 transition hover:text-blue-600"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) =>
+              link.label === "Home" ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleHeroClick}
+                  className="font-medium text-slate-600 transition hover:text-blue-600"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-medium text-slate-600 transition hover:text-blue-600"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
 
           {/* CTA */}
-          <div className="hidden lg:block">
-            <Magnetic>
-              <Button href="/contact">Start Project</Button>
-            </Magnetic>
-          </div>
+          <Button onClick={() => setOpen(true)}>Start Project</Button>
+
+          <StartProjectModal
+            open={open}
+            onClose={() => setOpen(false)}
+          />
 
           {/* Mobile Button */}
           <Magnetic>

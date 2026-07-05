@@ -13,7 +13,8 @@ import {
   Shine,
 } from "@/src/components/effects";
 
-import { Button, Section } from "@/src/components/ui";
+import { ButtonLink, Section } from "@/src/components/ui";
+import { useEffect } from "react";
 
 const features = [
   "AI Powered Solutions",
@@ -22,8 +23,15 @@ const features = [
 ];
 
 export default function Hero() {
+
+   useEffect(() => {
+    if (!window.location.hash) {
+      window.history.replaceState(null, "", "/#hero");
+    }
+  }, []);
+
   return (
-    <Section className="relative overflow-hidden pt-20">
+    <Section id="hero" className="relative overflow-hidden pt-20">
 
       {/* Background */}
 
@@ -66,16 +74,16 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-5">
             <Magnetic>
-              <Button href="/contact" size="lg">
+              <ButtonLink href="/contact" size="lg">
                 Start Your Project
                 <ArrowRight className="ml-2" size={18} />
-              </Button>
+              </ButtonLink>
             </Magnetic>
 
             <Magnetic>
-              <Button href="/projects" variant="outline" size="lg">
+              <ButtonLink href="/projects" variant="outline" size="lg">
                 View Our Work
-              </Button>
+              </ButtonLink>
             </Magnetic>
           </div>
 

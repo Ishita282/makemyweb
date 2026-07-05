@@ -2,7 +2,7 @@
 
 import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 
-import { Button, Section } from "@/src/components/ui";
+import { ButtonLink, Section } from "@/src/components/ui";
 import { AuroraBackground, Magnetic, Reveal } from "@/src/components/effects";
 
 export default function CTA() {
@@ -46,7 +46,7 @@ export default function CTA() {
 
         <div className="mt-12 flex flex-wrap justify-center gap-5">
           <Magnetic>
-            <Button
+            <ButtonLink
               href="/contact"
               variant="outline"
               size="lg"
@@ -54,11 +54,11 @@ export default function CTA() {
             >
               Start Your Project
               <ArrowRight size={18} className="ml-2" />
-            </Button>
+            </ButtonLink>
           </Magnetic>
 
           <Magnetic>
-            <Button
+            <ButtonLink
               href="/services"
               variant="outline"
               size="lg"
@@ -66,7 +66,7 @@ export default function CTA() {
             >
               <MessageCircle size={18} className="mr-2" />
               View Services
-            </Button>
+            </ButtonLink>
           </Magnetic>
         </div>
 

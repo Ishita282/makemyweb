@@ -8,7 +8,7 @@ import {
   SectionTitle,
   Card,
   Badge,
-  Button,
+  ButtonLink,
 } from "@/src/components/ui";
 import { Magnetic, Reveal } from "@/src/components/effects";
 
@@ -85,7 +85,7 @@ export default function Projects() {
 
       <div className="mt-16 text-center">
         <Magnetic>
-          <Button href="/projects">View All Projects</Button>
+          <ButtonLink href="/projects">View All Projects</ButtonLink>
         </Magnetic>
       </div>
     </Section>
