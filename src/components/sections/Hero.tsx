@@ -61,9 +61,9 @@ export default function Hero() {
           <h1 className="mt-8 text-5xl font-black leading-tight text-slate-900 md:text-6xl lg:text-7xl">
             Websites That
             <span className="block bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 bg-clip-text text-transparent">
-              Grow Businesses
+              Grow Businesses,
             </span>
-            Not Just Traffic.
+            Brands & Ideas.
           </h1>
 
           <p className="mt-8 max-w-xl text-lg leading-8 text-slate-600">
