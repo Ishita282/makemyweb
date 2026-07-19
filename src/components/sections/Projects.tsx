@@ -14,22 +14,25 @@ import { Magnetic, Reveal } from "@/src/components/effects";
 
 const projects = [
   {
-    title: "Restaurant Website",
+    title: "Ads Creation",
     image: "/images/project-1.webp",
-    category: "Business Website",
+    category: "Digital Marketing",
     technologies: ["Next.js", "Tailwind", "SEO"],
+    demoUrl: "https://adscreation.in/",
   },
   {
-    title: "Healthcare Dashboard",
+    title: "Protech Medical System",
     image: "/images/project-2.webp",
-    category: "Web Application",
-    technologies: ["React", "Firebase", "AI"],
+    category: "E-commerce Platform",
+    technologies: ["React", "Firebase", "MERN Stack"],
+    demoUrl: "https://protechmedicalsystems.com/",
   },
   {
-    title: "Fashion Store",
+    title: "Bug Tracker",
     image: "/images/project-3.webp",
-    category: "E-Commerce",
-    technologies: ["Next.js", "Stripe", "CMS"],
+    category: "Software Development",
+    technologies: ["Vite", "PostgreSQL", "TypeScript"],
+    demoUrl: "https://bug-trace-beta.vercel.app/",
   },
 ];
 
@@ -44,9 +47,7 @@ export default function Projects() {
 
       <div className="grid gap-8 lg:grid-cols-3">
         {projects.map((project) => (
-          <Reveal
-            key={project.title}
-           >
+          <Reveal key={project.title}>
             <Card className="group overflow-hidden p-0">
               <div className="relative overflow-hidden">
                 <Image
@@ -59,10 +60,15 @@ export default function Projects() {
 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
 
-                <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium opacity-0 transition duration-500 group-hover:opacity-100">
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium opacity-0 transition duration-500 group-hover:opacity-100 hover:bg-blue-600 hover:text-white"
+                >
                   View Project
                   <ArrowUpRight size={16} />
-                </div>
+                </a>
               </div>
 
               <div className="p-8">
