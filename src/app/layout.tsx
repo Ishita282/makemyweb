@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Navbar, Footer } from "@/src/components/layout";
+import Webby from "@/src/components/webby/Webby";
 
 export const metadata: Metadata = {
   title: "MakeMyWeb",
@@ -29,20 +30,30 @@ export const metadata: Metadata = {
   manifest: "/favicon_io/site.webmanifest",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body>
+
+      <body suppressHydrationWarning>
+
+        <Webby />
+
         <Navbar />
 
-        <main>{children}</main>
+        <main>
+          {children}
+        </main>
 
         <Footer />
+
       </body>
+
     </html>
   );
 }

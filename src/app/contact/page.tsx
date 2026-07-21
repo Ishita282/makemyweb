@@ -43,13 +43,13 @@ export default function ContactPage() {
             <h3 className="text-2xl font-bold">Contact Information</h3>
 
             <div className="mt-8 space-y-5 text-slate-600">
-              <p>📧 hello@makemyweb.com</p>
+              <p>📧 makemyweb2026@gmail.com</p>
 
               <p>🌍 Worldwide Remote</p>
 
               <p>⏰ Monday &ndash; Saturday</p>
 
-              <p>⚡ Usually responds within 24 hours</p>
+              <p>⚡ Usually responds within 2 hours</p>
             </div>
           </Card>
         </TiltCard>

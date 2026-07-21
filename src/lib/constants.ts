@@ -11,8 +11,8 @@ export const SITE = {
   name: "MakeMyWeb",
   description:
     "Premium websites, AI solutions and modern digital products.",
-  email: "hello@makemyweb.com",
-  phone: "+91 99999 99999",
+  email: "makemyweb2026@gmail.com",
+  phone: "+91 98994 20626",
   location: "Worldwide Remote",
 };
 

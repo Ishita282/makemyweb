@@ -168,7 +168,7 @@ ${form.notes || "N/A"}
 
                 <div className="flex gap-3">
                   <Clock3 />
-                  24 Hour Response
+                  2 Hour Response
                 </div>
 
                 <div className="flex gap-3">

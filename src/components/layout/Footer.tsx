@@ -6,7 +6,7 @@ import Container from "./Container";
 
 const services = [
   "Web Development",
-  "Mobile Apps",
+  "E-commerce",
   "AI Solutions",
   "UI/UX Design",
 ];
@@ -94,8 +94,8 @@ export default function Footer() {
 
             <div className="space-y-3 text-slate-400">
               <p>Worldwide Remote</p>
-              <p>hello@makemyweb.com</p>
-              <p>Mon – Sat</p>
+              <p>makemyweb2026@gmail.com</p>
+              <p>Mon &ndash; Sat</p>
             </div>
           </div>
         </div>
