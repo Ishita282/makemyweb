@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import Image from "next/image";
 
 import Container from "./Container";
@@ -18,41 +17,49 @@ const company = [
   { label: "Contact", href: "/contact" },
 ];
 
+const legal = [
+  {
+    label: "Privacy Policy",
+    href: "/privacy-policy",
+  },
+  {
+    label: "Terms & Conditions",
+    href: "/terms-and-conditions",
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-slate-950 text-white">
       <Container>
-        <div className="grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div>
-           <Link href="/" className="flex flex-col items-center">
-            <Image
-              src="/images/logo.webp"
-              alt="MakeMyWeb Logo"
-              width={56}
-              height={56}
-              priority
-              className="h-14 w-14 object-contain bg-white rounded m-2"
-            />
+            <Link href="/" className="flex flex-col items-center">
+              <Image
+                src="/images/logo.webp"
+                alt="MakeMyWeb Logo"
+                width={56}
+                height={56}
+                priority
+                className="m-2 h-14 w-14 rounded bg-white object-contain"
+              />
 
-            <span className="-mt-2 text-base font-bold leading-none tracking-tight">
-              <span className="text-blue-600">Make</span>
-              <span className="text-white-900">MyWeb</span>
-            </span>
-          </Link>
+              <span className="-mt-2 text-base font-bold leading-none tracking-tight">
+                <span className="text-blue-600">Make</span>
+                <span>MyWeb</span>
+              </span>
+            </Link>
 
             <p className="mt-5 leading-7 text-slate-400">
-              Premium websites, AI solutions, mobile apps,
-              and digital products crafted for businesses
-              worldwide.
+              Premium websites, AI solutions, mobile apps, and digital products
+              crafted for businesses worldwide.
             </p>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="mb-5 font-semibold">
-              Company
-            </h4>
+            <h4 className="mb-5 font-semibold">Company</h4>
 
             <ul className="space-y-3">
               {company.map((item) => (
@@ -70,17 +77,30 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="mb-5 font-semibold">
-              Services
-            </h4>
+            <h4 className="mb-5 font-semibold">Services</h4>
 
             <ul className="space-y-3">
               {services.map((service) => (
-                <li
-                  key={service}
-                  className="text-slate-400"
-                >
+                <li key={service} className="text-slate-400">
                   {service}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="mb-5 font-semibold">Legal</h4>
+
+            <ul className="space-y-3">
+              {legal.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-slate-400 transition hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,14 +108,12 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-5 font-semibold">
-              Contact
-            </h4>
+            <h4 className="mb-5 font-semibold">Contact</h4>
 
             <div className="space-y-3 text-slate-400">
               <p>Worldwide Remote</p>
               <p>makemyweb2026@gmail.com</p>
-              <p>Mon &ndash; Sat</p>
+              <p>Monday &ndash; Saturday</p>
             </div>
           </div>
         </div>
