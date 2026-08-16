@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Navbar, Footer } from "@/src/components/layout";
+import AuthProvider from "@/src/components/provider/AuthProvider";
 import Webby from "@/src/components/webby/Webby";
 
 export const metadata: Metadata = {
@@ -30,30 +31,24 @@ export const metadata: Metadata = {
   manifest: "/favicon_io/site.webmanifest",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-
       <body suppressHydrationWarning>
+        <AuthProvider>
+          <Webby />
 
-        <Webby />
+          <Navbar />
 
-        <Navbar />
+          <main>{children}</main>
 
-        <main>
-          {children}
-        </main>
-
-        <Footer />
-
+          <Footer />
+        </AuthProvider>
       </body>
-
     </html>
   );
 }

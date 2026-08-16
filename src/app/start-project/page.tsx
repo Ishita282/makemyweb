@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Button,
   Card,
@@ -11,6 +12,8 @@ import {
 } from "@/src/components/ui";
 
 export default function StartProjectPage() {
+  const router = useRouter();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,10 +25,13 @@ export default function StartProjectPage() {
     details: "",
   });
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function handleChange(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) {
     setForm((prev) => ({
       ...prev,
@@ -33,17 +39,36 @@ export default function StartProjectPage() {
     }));
   }
 
-  async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault();
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
 
-    console.log(form);
+  setError("");
+  setLoading(true);
 
-    // API call will go here later
+  try {
+    const response = await fetch("/api/project", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-    alert("Project inquiry submitted!");
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.error || "Unable to submit your project.");
+      return;
+    }
+
+    router.push("/dashboard?projectCreated=true");
+    router.refresh();
+  } catch {
+    setError("Unable to connect to the server. Please try again.");
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <Section>
@@ -54,10 +79,13 @@ export default function StartProjectPage() {
       />
 
       <Card className="mx-auto max-w-4xl">
-        <form
-          onSubmit={handleSubmit}
-          className="grid gap-6"
-        >
+        {error && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="grid gap-6">
           <div className="grid gap-6 md:grid-cols-2">
             <Input
               name="name"
@@ -99,7 +127,7 @@ export default function StartProjectPage() {
             value={form.service}
             onChange={handleChange}
             required
-            className="rounded-xl border border-slate-200 px-4 py-3 outline-none"
+            className="rounded-xl border border-slate-200 px-4 py-3 outline-none transition focus:border-blue-500"
           >
             <option value="">Select Service</option>
             <option>Website Development</option>
@@ -116,7 +144,8 @@ export default function StartProjectPage() {
               name="budget"
               value={form.budget}
               onChange={handleChange}
-              className="rounded-xl border border-slate-200 px-4 py-3 outline-none"
+              required
+              className="rounded-xl border border-slate-200 px-4 py-3 outline-none transition focus:border-blue-500"
             >
               <option value="">Estimated Budget</option>
               <option>Under ₹50,000</option>
@@ -129,7 +158,8 @@ export default function StartProjectPage() {
               name="timeline"
               value={form.timeline}
               onChange={handleChange}
-              className="rounded-xl border border-slate-200 px-4 py-3 outline-none"
+              required
+              className="rounded-xl border border-slate-200 px-4 py-3 outline-none transition focus:border-blue-500"
             >
               <option value="">Project Timeline</option>
               <option>ASAP</option>
@@ -148,8 +178,8 @@ export default function StartProjectPage() {
             required
           />
 
-          <Button type="submit" size="lg">
-            Submit Project Inquiry
+          <Button type="submit" size="lg" disabled={loading}>
+            {loading ? "Submitting..." : "Submit Project Inquiry"}
           </Button>
         </form>
       </Card>

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu, User, LogOut, LayoutDashboard } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 import Container from "./Container";
 import { Button } from "@/src/components/ui";
@@ -13,7 +14,7 @@ import { Magnetic } from "@/src/components/effects";
 import { StartProjectModal } from "@/src/components/sections";
 
 const links = [
-  { label: "Home", href: "/#hero" },
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
@@ -22,10 +23,25 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const pathname = usePathname();
 
+  const { status } = useSession();
+
+  const isLoggedIn = status === "authenticated";
+
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
+
   function handleHeroClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    // If already on the homepage, scroll manually every time.
     if (pathname === "/") {
       e.preventDefault();
 
@@ -36,13 +52,19 @@ export default function Navbar() {
     }
   }
 
+  async function handleLogout() {
+    await signOut({
+      callbackUrl: "/",
+    });
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-xl">
       <Container>
         <nav className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link
-            href="/#hero"
+            href="/"
             onClick={handleHeroClick}
             className="flex flex-col items-center"
           >
@@ -81,29 +103,148 @@ export default function Navbar() {
                 >
                   {link.label}
                 </Link>
-              )
+              ),
             )}
           </div>
 
-          {/* CTA */}
-          <Button onClick={() => setOpen(true)}>Start Project</Button>
+          {/* Right Side */}
+          <div className="hidden items-center gap-3 lg:flex">
+            {!isLoggedIn && status !== "loading" && (
+              <>
+                <Link
+                  href="/login"
+                  className="rounded-xl px-4 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  Login
+                </Link>
 
-          <StartProjectModal
-            open={open}
-            onClose={() => setOpen(false)}
-          />
+                <Link
+                  href="/signup"
+                  className="rounded-xl border border-slate-200 px-4 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
 
-          {/* Mobile Button */}
-          <Magnetic>
-            <button
-              className="rounded-xl border border-slate-200 p-2 lg:hidden"
-              aria-label="Open navigation menu"
-            >
-              <Menu size={22} />
-            </button>
-          </Magnetic>
+            {isLoggedIn && (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
+              </>
+            )}
+
+            <Button onClick={() => setOpen(true)}>
+              Start Project
+            </Button>
+          </div>
+
+          {/* Mobile */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="rounded-xl border border-slate-200 p-2"
+                aria-label="Open navigation menu"
+              >
+                <Menu size={22} />
+              </button>
+            </Magnetic>
+          </div>
         </nav>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="border-t border-slate-200 py-5 lg:hidden">
+            <div className="flex flex-col gap-2">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 font-medium text-slate-700 transition hover:bg-slate-100"
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+              <div className="my-2 h-px bg-slate-200" />
+
+              {!isLoggedIn && status !== "loading" && (
+                <>
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100"
+                  >
+                    <User className="h-4 w-4" />
+                    Login
+                  </Link>
+
+                  <Link
+                    href="/signup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="rounded-xl px-4 py-3 font-semibold text-blue-600 hover:bg-blue-50"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+
+              {isLoggedIn && (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100"
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 rounded-xl px-4 py-3 text-left font-semibold text-red-600 hover:bg-red-50"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </button>
+                </>
+              )}
+
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+              >
+                Start Project
+              </Button>
+            </div>
+          </div>
+        )}
       </Container>
+
+      <StartProjectModal
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </header>
   );
 }

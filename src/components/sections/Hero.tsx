@@ -26,7 +26,7 @@ export default function Hero() {
 
    useEffect(() => {
     if (!window.location.hash) {
-      window.history.replaceState(null, "", "/#hero");
+      window.history.replaceState(null, "", "/");
     }
   }, []);
 
