@@ -33,6 +33,12 @@ export default async function DashboardPage() {
   const isAdmin =
     !!adminEmail && customerEmail.trim().toLowerCase() === adminEmail;
 
+  console.log("ADMIN CHECK:", {
+    customerEmail,
+    adminEmail,
+    isAdmin,
+  });
+
   const customerProjects = session.user.id
     ? await prisma.project.findMany({
         where: {
