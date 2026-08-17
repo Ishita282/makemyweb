@@ -28,6 +28,11 @@ export default async function DashboardPage() {
   const customerName = session.user.name?.split(" ")[0] || "there";
   const customerEmail = session.user.email || "";
 
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+
+  const isAdmin =
+    !!adminEmail && customerEmail.trim().toLowerCase() === adminEmail;
+
   const customerProjects = session.user.id
     ? await prisma.project.findMany({
         where: {
@@ -67,6 +72,15 @@ export default async function DashboardPage() {
               Dashboard
             </Link>
 
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100"
+              >
+                Admin Panel
+              </Link>
+            )}
+
             <Link
               href="/account"
               className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white"
@@ -90,8 +104,8 @@ export default async function DashboardPage() {
           </h1>
 
           <p className="mt-2 max-w-2xl text-sm leading-6 text-blue-100 sm:text-base">
-            Manage your projects, services, payments, invoices, and account
-            from one place.
+            Manage your projects, services, payments, invoices, and account from
+            one place.
           </p>
 
           {customerEmail && (
@@ -194,9 +208,7 @@ export default async function DashboardPage() {
 
         {/* Quick Actions */}
         <section className="mt-8">
-          <h2 className="text-xl font-bold text-slate-950">
-            Quick Actions
-          </h2>
+          <h2 className="text-xl font-bold text-slate-950">Quick Actions</h2>
 
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             <QuickAction
@@ -279,9 +291,7 @@ export default async function DashboardPage() {
 
           {/* Account */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6">
-            <h2 className="text-xl font-bold text-slate-950">
-              Account
-            </h2>
+            <h2 className="text-xl font-bold text-slate-950">Account</h2>
 
             <div className="mt-5 space-y-3">
               <AccountItem
@@ -420,9 +430,7 @@ function AccountItem({
         {icon}
       </div>
 
-      <span className="text-sm font-semibold text-slate-700">
-        {title}
-      </span>
+      <span className="text-sm font-semibold text-slate-700">{title}</span>
     </Link>
   );
 }
@@ -436,13 +444,9 @@ function ServiceCard({
 }) {
   return (
     <div className="rounded-xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-sm">
-      <h3 className="font-semibold text-slate-950">
-        {title}
-      </h3>
+      <h3 className="font-semibold text-slate-950">{title}</h3>
 
-      <p className="mt-2 text-sm leading-6 text-slate-500">
-        {description}
-      </p>
+      <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
 
       <Link
         href="/services"
