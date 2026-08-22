@@ -8,19 +8,19 @@ import { Marquee, Reveal } from "@/src/components/effects";
 const testimonials = [
   {
     name: "Muskan Joshi",
-    role: "CEO, BrightTech",
+    role: "CEO, Protechmedicalsystem",
     review:
       "The team delivered a beautiful website that exceeded our expectations. Communication was smooth and the final product significantly improved our online presence.",
   },
   {
     name: "Gaurav Sharma",
-    role: "Founder, Nova Studio",
+    role: "Marketing Director",
     review:
       "Professional, fast, and incredibly talented. They transformed our idea into a modern web application that our clients love using every day.",
   },
   {
     name: "Ananya Verma",
-    role: "Marketing Manager",
+    role: "Manager",
     review:
       "From design to launch, everything was handled perfectly. We noticed better engagement and more customer inquiries within weeks.",
   },

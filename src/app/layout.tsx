@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 import { Navbar, Footer } from "@/src/components/layout";
 import AuthProvider from "@/src/components/provider/AuthProvider";
+import RefreshOnBack from "@/src/components/provider/RefreshOnBack";
 import Webby from "@/src/components/webby/Webby";
 
 export const metadata: Metadata = {
@@ -40,6 +43,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning>
         <AuthProvider>
+          <RefreshOnBack />
           <Webby />
 
           <Navbar />

@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 
 import DeleteAccountButton from "@/src/components/auth/account/DeleteAccountButton";
-import { auth, signOut } from "@/src/lib/auth";
+import { auth } from "@/src/lib/auth";
+import LogoutButton from "@/src/components/auth/LogoutButton";
 
 export default async function AccountPage() {
   const session = await auth();
@@ -137,32 +138,19 @@ export default async function AccountPage() {
             </Link>
 
             {/* Logout */}
-            <form
-              action={async () => {
-                "use server";
+            <LogoutButton className="flex w-full items-center gap-4 rounded-xl border border-red-100 p-4 text-left transition hover:bg-red-50">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-600">
+                <LogOut className="h-5 w-5" />
+              </div>
 
-                await signOut({
-                  redirectTo: "/",
-                });
-              }}
-            >
-              <button
-                type="submit"
-                className="flex w-full items-center gap-4 rounded-xl border border-red-100 p-4 text-left transition hover:bg-red-50"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-600">
-                  <LogOut className="h-5 w-5" />
-                </div>
+              <div>
+                <p className="text-sm font-semibold text-red-600">Logout</p>
 
-                <div>
-                  <p className="text-sm font-semibold text-red-600">Logout</p>
-
-                  <p className="mt-1 text-xs text-red-400">
-                    Sign out of your MakeMyWeb account.
-                  </p>
-                </div>
-              </button>
-            </form>
+                <p className="mt-1 text-xs text-red-400">
+                  Sign out of your MakeMyWeb account.
+                </p>
+              </div>
+            </LogoutButton>
 
             {/* Delete Account */}
             <DeleteAccountButton />

@@ -47,3 +47,13 @@ export type SignupVerification = Prisma.SignupVerificationModel
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model Wishlist
+ * 
+ */
+export type Wishlist = Prisma.WishlistModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel

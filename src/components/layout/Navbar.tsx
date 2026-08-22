@@ -5,7 +5,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, User, LogOut, LayoutDashboard } from "lucide-react";
+import {
+  Menu,
+  User,
+  LogOut,
+  LayoutDashboard,
+  Heart,
+  ShoppingCart,
+} from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
 import Container from "./Container";
@@ -128,29 +135,60 @@ export default function Navbar() {
             )}
 
             {isLoggedIn && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-100"
-                >
-                  <LayoutDashboard className="h-4 w-4" />
-                  Dashboard
-                </Link>
-
+              <div className="group relative">
+                {/* Main dropdown button */}
                 <button
                   type="button"
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-semibold text-slate-600 transition hover:bg-red-50 hover:text-red-600"
+                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-semibold text-slate-700 transition hover:bg-slate-100"
                 >
-                  <LogOut className="h-4 w-4" />
-                  Logout
+                  <User className="h-4 w-4" />
+                  Account
+                  <span className="text-xs transition-transform duration-200 group-hover:rotate-180">
+                    ▼
+                  </span>
                 </button>
-              </>
+
+                {/* Dropdown */}
+                <div className="invisible absolute right-0 top-full mt-2 w-52 translate-y-2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  <Link
+                    href="/saved-services"
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-medium text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <Heart className="h-4 w-4" />
+                    Saved Services
+                  </Link>
+
+                  <Link
+                    href="/cart"
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-medium text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    Cart
+                  </Link>
+
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-medium text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+
+                  <div className="my-2 h-px bg-slate-200" />
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left font-medium text-red-600 transition hover:bg-red-50"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </button>
+                </div>
+              </div>
             )}
 
-            <Button onClick={() => setOpen(true)}>
-              Start Project
-            </Button>
+            <Button onClick={() => setOpen(true)}>Start Project</Button>
           </div>
 
           {/* Mobile */}
@@ -241,10 +279,7 @@ export default function Navbar() {
         )}
       </Container>
 
-      <StartProjectModal
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      <StartProjectModal open={open} onClose={() => setOpen(false)} />
     </header>
   );
 }

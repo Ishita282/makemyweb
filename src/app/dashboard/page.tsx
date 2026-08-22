@@ -14,7 +14,8 @@ import {
   User,
 } from "lucide-react";
 
-import { auth, signOut } from "@/src/lib/auth";
+import { auth } from "@/src/lib/auth";
+import LogoutButton from "@/src/components/auth/LogoutButton";
 import { prisma } from "@/src/lib/prisma";
 
 export default async function DashboardPage() {
@@ -224,7 +225,7 @@ export default async function DashboardPage() {
             />
 
             <QuickAction
-              href="/projects"
+              href="/cart"
               icon={<BriefcaseBusiness className="h-5 w-5" />}
               label="My Projects"
             />
@@ -318,28 +319,15 @@ export default async function DashboardPage() {
                 title="Contact Support"
               />
 
-              <form
-                action={async () => {
-                  "use server";
+              <LogoutButton className="flex w-full items-center gap-3 rounded-xl p-3 text-left transition hover:bg-red-50">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500">
+                  <LogOut className="h-5 w-5" />
+                </div>
 
-                  await signOut({
-                    redirectTo: "/",
-                  });
-                }}
-              >
-                <button
-                  type="submit"
-                  className="flex w-full items-center gap-3 rounded-xl p-3 text-left transition hover:bg-red-50"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500">
-                    <LogOut className="h-5 w-5" />
-                  </div>
-
-                  <span className="text-sm font-semibold text-red-600">
-                    Logout
-                  </span>
-                </button>
-              </form>
+                <span className="text-sm font-semibold text-red-600">
+                  Logout
+                </span>
+              </LogoutButton>
             </div>
           </div>
         </section>

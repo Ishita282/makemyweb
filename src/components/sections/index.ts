@@ -8,4 +8,5 @@ export { default as WhyUs } from "./WhyUs";
 export { default as FAQ } from "./FAQ";
 export { default as Skills } from "./Skills";
 
-export { StartProjectModal } from "./StartProjectModal"; 
+export { StartProjectModal } from "./StartProjectModal";
+export { default as ServiceActions } from "./ServiceActions";

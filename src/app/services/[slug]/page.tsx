@@ -4,7 +4,9 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, Check, Clock3, Star } from "lucide-react";
 
 import { services } from "@/src/data/services";
-
+import ServiceActions from "@/src/components/sections/ServiceActions";
+import { auth } from "@/src/lib/auth";
+import { prisma } from "@/src/lib/prisma";
 interface ServicePageProps {
   params: Promise<{
     slug: string;
@@ -20,12 +22,37 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  const session = await auth();
+
+  let initialWishlisted = false;
+  let initialAddedToCart = false;
+
+  if (session?.user?.id) {
+    const [wishlistItem, cartItem] = await Promise.all([
+      prisma.wishlist.findFirst({
+        where: {
+          userId: session.user.id,
+          serviceId: service.id,
+        },
+      }),
+
+      prisma.cartItem.findFirst({
+        where: {
+          userId: session.user.id,
+          serviceId: service.id,
+        },
+      }),
+    ]);
+
+    initialWishlisted = !!wishlistItem;
+    initialAddedToCart = !!cartItem;
+  }
+
   const discount = Math.round(
     ((service.pricing.price - service.pricing.startingAt) /
       service.pricing.price) *
       100,
   );
-
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Breadcrumb */}
@@ -138,11 +165,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
               </div>
             </div>
 
-            {/* CTA */}
+            {/* Service Actions */}
             <div className="mt-8">
+              <ServiceActions
+                serviceId={service.id}
+                initialWishlisted={initialWishlisted}
+                initialAddedToCart={initialAddedToCart}
+              />
+              
               <Link
                 href={`/contact?service=${service.id}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
+                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
               >
                 Start Project
                 <ArrowRight size={18} />
