@@ -14,12 +14,15 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
+  role          String    @default("USER")
 
   accounts Account[]
   sessions Session[]
   projects Project[]
   wishlists Wishlist[]
   cartItems CartItem[]
+  reviews   Review[]
+  testimonials Testimonial[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -120,5 +123,42 @@ model CartItem {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, serviceId])
+  @@index([userId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  serviceId String
+  rating    Int
+  review    String
+  approved  Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, serviceId])
+  @@index([serviceId])
+  @@index([userId])
+  @@index([approved])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  name      String
+  role      String
+  review    String   @db.Text
+  rating    Int      @default(5)
+  image     String?
+  published Boolean  @default(true)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([userId])
 }

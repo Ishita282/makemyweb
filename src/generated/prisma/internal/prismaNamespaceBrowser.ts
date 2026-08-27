@@ -58,7 +58,9 @@ export const ModelName = {
   SignupVerification: 'SignupVerification',
   Project: 'Project',
   Wishlist: 'Wishlist',
-  CartItem: 'CartItem'
+  CartItem: 'CartItem',
+  Review: 'Review',
+  Testimonial: 'Testimonial'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -84,6 +86,7 @@ export const UserScalarFieldEnum = {
   password: 'password',
   emailVerified: 'emailVerified',
   image: 'image',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -179,6 +182,36 @@ export const CartItemScalarFieldEnum = {
 } as const
 
 export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typeof CartItemScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  serviceId: 'serviceId',
+  rating: 'rating',
+  review: 'review',
+  approved: 'approved',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const TestimonialScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  role: 'role',
+  review: 'review',
+  rating: 'rating',
+  image: 'image',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
 
 
 export const SortOrder = {

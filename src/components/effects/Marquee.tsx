@@ -6,32 +6,38 @@ import { ReactNode } from "react";
 interface MarqueeProps {
   children: ReactNode;
   duration?: number;
+  duplicate?: boolean;
 }
 
 export default function Marquee({
   children,
   duration = 20,
+  duplicate = true,
 }: MarqueeProps) {
   return (
     <div className="overflow-hidden">
       <motion.div
         className="flex w-max"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          duration,
-          ease: "linear",
-          repeat: Infinity,
-        }}
+        animate={{ x: duplicate ? ["0%", "-50%"] : "0%" }}
+        transition={
+          duplicate
+            ? {
+                duration,
+                ease: "linear",
+                repeat: Infinity,
+              }
+            : undefined
+        }
       >
-        {/* First Row */}
         <div className="flex gap-8 pr-8">
           {children}
         </div>
 
-        {/* Duplicate Row */}
-        <div className="flex gap-8">
-          {children}
-        </div>
+        {duplicate && (
+          <div className="flex gap-8">
+            {children}
+          </div>
+        )}
       </motion.div>
     </div>
   );

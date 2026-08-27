@@ -37,9 +37,6 @@ export const services = [
             "Personal brands",
         ],
 
-        rating: 5.0,
-        reviewsCount: 120,
-
         howItWorks: [
             {
                 step: 1,
@@ -70,27 +67,6 @@ export const services = [
                 title: "Launch",
                 description:
                     "We test everything and deploy your website so it is ready for customers.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Rahul Mehta",
-                rating: 5,
-                review:
-                    "The website looks professional, loads quickly, and works perfectly on mobile. The whole development process was smooth.",
-            },
-            {
-                name: "Priya Sharma",
-                rating: 5,
-                review:
-                    "Very happy with the final website. The design was modern and the team understood our requirements well.",
-            },
-            {
-                name: "Amit Verma",
-                rating: 4,
-                review:
-                    "Good experience overall. The website was delivered with the features we requested and the support was helpful.",
             },
         ],
 
@@ -157,10 +133,7 @@ export const services = [
             "Internal business tools",
             "Online platforms",
         ],
-
-        rating: 4.9,
-        reviewsCount: 85,
-
+        
         howItWorks: [
             {
                 step: 1,
@@ -194,26 +167,6 @@ export const services = [
             },
         ],
 
-        reviews: [
-            {
-                name: "Nikhil Agarwal",
-                rating: 5,
-                review:
-                    "The custom dashboard has made our internal workflow much easier to manage. The interface is clean and easy to use.",
-            },
-            {
-                name: "Megha Jain",
-                rating: 5,
-                review:
-                    "The application was built around our actual business requirements instead of using a generic solution.",
-            },
-            {
-                name: "Saurabh Gupta",
-                rating: 4,
-                review:
-                    "Good development experience and a well-structured application. The team was responsive to our requirements.",
-            },
-        ],
         faq: [
             {
                 question: "Can you build a custom SaaS application?",
@@ -273,9 +226,6 @@ export const services = [
             "D2C brands",
         ],
 
-        rating: 4.8,
-        reviewsCount: 95,
-
         howItWorks: [
             {
                 step: 1,
@@ -306,21 +256,6 @@ export const services = [
                 title: "Launch",
                 description:
                     "We test the store and prepare it for customers.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Neha Kapoor",
-                rating: 5,
-                review:
-                    "Our online store looks much better now. The shopping experience is simple and easy to use.",
-            },
-            {
-                name: "Arjun Singh",
-                rating: 5,
-                review:
-                    "The e-commerce website was exactly what we needed. The product management and checkout experience are great.",
             },
         ],
 
@@ -382,8 +317,6 @@ export const services = [
             "Online platforms",
         ],
 
-        rating: 4.7,
-        reviewsCount: 70,
 
         howItWorks: [
             {
@@ -415,21 +348,6 @@ export const services = [
                 title: "Launch",
                 description:
                     "We deploy the AI solution and help you start using it.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Karan Malhotra",
-                rating: 5,
-                review:
-                    "The AI chatbot has made it much easier for our customers to get answers quickly.",
-            },
-            {
-                name: "Simran Gupta",
-                rating: 4,
-                review:
-                    "The AI workflow helped reduce several repetitive tasks for our team.",
             },
         ],
 
@@ -491,9 +409,6 @@ export const services = [
             "Operations teams",
         ],
 
-        rating: 4.9,
-        reviewsCount: 80,
-
         howItWorks: [
             {
                 step: 1,
@@ -524,27 +439,6 @@ export const services = [
                 title: "Launch",
                 description:
                     "We test and deliver the analytics solution.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Rohit Sharma",
-                rating: 5,
-                review:
-                    "The analytics dashboard made it much easier for us to understand our business performance and track important metrics.",
-            },
-            {
-                name: "Ananya Verma",
-                rating: 5,
-                review:
-                    "The dashboards are clean, easy to understand, and give us a much better view of our data.",
-            },
-            {
-                name: "Vikram Gupta",
-                rating: 4,
-                review:
-                    "A useful analytics solution with a clear dashboard and helpful visualizations.",
             },
         ],
 
@@ -601,9 +495,6 @@ export const services = [
             "Growing companies",
         ],
 
-        rating: 4.8,
-        reviewsCount: 90,
-
         howItWorks: [
             {
                 step: 1,
@@ -634,27 +525,6 @@ export const services = [
                 title: "Growth",
                 description:
                     "We monitor performance and identify further opportunities.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Pooja Mehta",
-                rating: 5,
-                review:
-                    "The new branding gave our business a much more professional appearance and made our online presence feel consistent.",
-            },
-            {
-                name: "Aditya Kapoor",
-                rating: 5,
-                review:
-                    "The SEO improvements and website optimization gave us a much better foundation for growing our online presence.",
-            },
-            {
-                name: "Sneha Arora",
-                rating: 4,
-                review:
-                    "Great work on the branding and UI. Everything looks much more polished and professional now.",
             },
         ],
 
@@ -710,8 +580,7 @@ export const services = [
             "New product ideas",
         ],
 
-        rating: 4.6,
-        reviewsCount: 60,
+
 
         howItWorks: [
             {
@@ -743,15 +612,6 @@ export const services = [
                 title: "Launch",
                 description:
                     "We prepare the application for deployment.",
-            },
-        ],
-
-        reviews: [
-            {
-                name: "Demo User",
-                rating: 5,
-                review:
-                    "This is a demo review for testing the mobile app service page.",
             },
         ],
 

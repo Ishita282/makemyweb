@@ -43,7 +43,12 @@ const projects = [
   },
 ];
 
-export default function Projects() {
+interface ProjectsProps {
+  limit?: number;
+}
+
+export default function Projects({ limit }: ProjectsProps) {
+  const displayedProjects = limit ? projects.slice(0, limit) : projects;
   return (
     <Section>
       <SectionTitle
@@ -53,7 +58,7 @@ export default function Projects() {
       />
 
       <div className="grid gap-8 lg:grid-cols-3">
-        {projects.map((project) => (
+        {displayedProjects.map((project) => (
           <Reveal key={project.title}>
             <Card className="group overflow-hidden p-0">
               <div className="relative overflow-hidden">
@@ -97,9 +102,13 @@ export default function Projects() {
       </div>
 
       <div className="mt-16 text-center">
-        <Magnetic>
-          <ButtonLink href="/projects">View All Projects</ButtonLink>
-        </Magnetic>
+        {limit && (
+          <div className="mt-16 text-center">
+            <Magnetic>
+              <ButtonLink href="/projects">View All Projects</ButtonLink>
+            </Magnetic>
+          </div>
+        )}
       </div>
     </Section>
   );

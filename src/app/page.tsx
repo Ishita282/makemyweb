@@ -5,11 +5,12 @@ import {
   Process,
   Projects,
   Services,
-  Testimonials,
   WhyUs,
   Skills,
 } from "@/src/components/sections";
-import {CursorSpotlight} from "@/src/components/effects";
+import TestimonialsServer from "@/src/components/server/TestimonialsServer";
+
+import { CursorSpotlight } from "@/src/components/effects";
 
 export default function HomePage() {
   return (
@@ -17,12 +18,12 @@ export default function HomePage() {
       <main>
         <CursorSpotlight />
         <Hero />
-        <Services limit={6} />
+        <Services limit={3} />
         <Skills />
-        <Projects />
+        <Projects limit={3} />
         <WhyUs />
         <Process />
-        <Testimonials />
+        <TestimonialsServer />
         <FAQ />
         <CTA />
       </main>

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, Clock3, Star } from "lucide-react";
 
 import { services } from "@/src/data/services";
 import ServiceActions from "@/src/components/sections/ServiceActions";
+import ReviewForm from "./reviews/ReviewForm";
 import { auth } from "@/src/lib/auth";
 import { prisma } from "@/src/lib/prisma";
 interface ServicePageProps {
@@ -26,6 +27,31 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   let initialWishlisted = false;
   let initialAddedToCart = false;
+
+  const reviews = await prisma.review.findMany({
+    where: {
+      serviceId: service.id,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const reviewCount = reviews.length;
+
+  const averageRating =
+    reviewCount > 0
+      ? reviews.reduce((total, review) => total + review.rating, 0) /
+        reviewCount
+      : 0;
 
   if (session?.user?.id) {
     const [wishlistItem, cartItem] = await Promise.all([
@@ -117,7 +143,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 <Star size={18} className="fill-amber-400 text-amber-400" />
 
                 <span className="font-semibold text-slate-900">
-                  {service.rating.toFixed(1)}
+                  {averageRating > 0 ? averageRating.toFixed(1) : "No rating"}
                 </span>
               </div>
 
@@ -127,7 +153,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 href="#reviews"
                 className="text-sm font-medium text-blue-600 hover:underline"
               >
-                {service.reviewsCount} Reviews
+                {reviewCount} Reviews
               </a>
             </div>
 
@@ -172,7 +198,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 initialWishlisted={initialWishlisted}
                 initialAddedToCart={initialAddedToCart}
               />
-              
+
               <Link
                 href={`/contact?service=${service.id}`}
                 className="mt-3 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
@@ -336,39 +362,69 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {/* Reviews */}
+      {/* Reviews */}
       <section id="reviews" className="scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
             Customer Feedback
           </p>
 
-          <h2 className="mt-2 text-3xl font-bold text-slate-950">Reviews</h2>
+          <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-3xl font-bold text-slate-950">Reviews</h2>
 
-          {service.reviews.length === 0 ? (
+              {reviewCount > 0 && (
+                <div className="mt-3 flex items-center gap-2">
+                  <div className="flex gap-1">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star
+                        key={index}
+                        size={18}
+                        className={
+                          index < Math.round(averageRating)
+                            ? "fill-amber-400 text-amber-400"
+                            : "text-slate-300"
+                        }
+                      />
+                    ))}
+                  </div>
+
+                  <span className="text-sm font-medium text-slate-600">
+                    {averageRating.toFixed(1)} ({reviewCount}{" "}
+                    {reviewCount === 1 ? "review" : "reviews"})
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {reviews.length === 0 ? (
             <div className="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
               <Star size={32} className="mx-auto text-slate-300" />
 
               <p className="mt-4 font-medium text-slate-700">No reviews yet</p>
 
               <p className="mt-2 text-sm text-slate-500">
-                Be one of the first clients to review this service.
+                Be the first client to review this service.
               </p>
             </div>
           ) : (
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {service.reviews.map((review, index) => (
+              {reviews.map((review) => (
                 <div
-                  key={index}
+                  key={review.id}
                   className="rounded-2xl border border-slate-200 bg-white p-6"
                 >
                   <div className="flex gap-1">
-                    {Array.from({
-                      length: review.rating,
-                    }).map((_, i) => (
+                    {Array.from({ length: 5 }).map((_, index) => (
                       <Star
-                        key={i}
+                        key={index}
                         size={16}
-                        className="fill-amber-400 text-amber-400"
+                        className={
+                          index < review.rating
+                            ? "fill-amber-400 text-amber-400"
+                            : "text-slate-300"
+                        }
                       />
                     ))}
                   </div>
@@ -377,11 +433,44 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     {review.review}
                   </p>
 
-                  <p className="mt-5 font-semibold text-slate-950">
-                    {review.name}
-                  </p>
+                  <div className="mt-5 flex items-center gap-3">
+                    {review.user.image ? (
+                      <Image
+                        src={review.user.image}
+                        alt={review.user.name || "User"}
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-600">
+                        {(review.user.name?.[0] ?? "U").toUpperCase()}
+                      </div>
+                    )}
+
+                    <p className="font-semibold text-slate-950">
+                      {review.user.name || "User"}
+                    </p>
+                  </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {session?.user?.id && <ReviewForm serviceId={service.id} />}
+
+          {!session?.user?.id && (
+            <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 text-center">
+              <p className="text-sm text-slate-600">
+                Please log in to leave a review.
+              </p>
+
+              <Link
+                href="/login"
+                className="mt-4 inline-flex rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                Log In
+              </Link>
             </div>
           )}
         </div>

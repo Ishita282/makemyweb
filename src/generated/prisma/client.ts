@@ -81,3 +81,13 @@ export type Wishlist = Prisma.WishlistModel
  * 
  */
 export type CartItem = Prisma.CartItemModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
+ * Model Testimonial
+ * 
+ */
+export type Testimonial = Prisma.TestimonialModel
