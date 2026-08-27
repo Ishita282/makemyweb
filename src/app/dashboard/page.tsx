@@ -16,6 +16,7 @@ import {
 
 import { auth } from "@/src/lib/auth";
 import LogoutButton from "@/src/components/auth/LogoutButton";
+import StartProjectButton from "@/src/components/server/StartProjectButton";
 import { prisma } from "@/src/lib/prisma";
 
 export default async function DashboardPage() {
@@ -121,13 +122,7 @@ export default async function DashboardPage() {
             </p>
           )}
 
-          <Link
-            href="/start-project"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
-          >
-            <Plus className="h-4 w-4" />
-            Start a Project
-          </Link>
+          <StartProjectButton />
         </section>
 
         {/* Projects */}
@@ -168,7 +163,7 @@ export default async function DashboardPage() {
               </p>
 
               <Link
-                href="/start-project"
+                href="/services"
                 className="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
               >
                 <Plus className="h-4 w-4" />
@@ -285,13 +280,7 @@ export default async function DashboardPage() {
                   </p>
                 </div>
 
-                <Link
-                  href="/start-project"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
-                >
-                  Start Project
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <StartProjectButton />
               </div>
             </div>
           </div>

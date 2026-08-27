@@ -247,6 +247,23 @@ export default function Navbar() {
               {isLoggedIn && (
                 <>
                   <Link
+                    href="/saved-services"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <Heart className="h-4 w-4" />
+                    Saved Services
+                  </Link>
+
+                  <Link
+                    href="/cart"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 font-medium text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    Cart
+                  </Link>
+                  <Link
                     href="/dashboard"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-2 rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-100"
