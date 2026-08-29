@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Plus, Quote, Star, X, Trash2 } from "lucide-react";
 
@@ -176,6 +177,31 @@ export default function Testimonials({
                   </button>
                 )}
 
+                {/* Author */}
+                <div className="mb-6 flex items-center gap-3">
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      height={44}
+                      width={44}
+                      className="h-11 w-11 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">
+                      {item.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+
+                  <div>
+                    <h3 className="font-semibold text-slate-900">
+                      {item.name}
+                    </h3>
+
+                    <p className="text-sm text-slate-500">{item.role}</p>
+                  </div>
+                </div>
+
                 {/* Stars */}
                 <div className="mb-6 flex gap-1 pr-12">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -193,13 +219,6 @@ export default function Testimonials({
 
                 {/* Review */}
                 <p className="leading-8 text-slate-600">{item.review}</p>
-
-                {/* Author */}
-                <div className="mt-8">
-                  <h3 className="font-semibold text-slate-900">{item.name}</h3>
-
-                  <p className="text-sm text-slate-500">{item.role}</p>
-                </div>
               </Card>
             ))}
           </Marquee>
