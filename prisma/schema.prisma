@@ -117,6 +117,9 @@ model CartItem {
   serviceId String
   quantity  Int      @default(1)
 
+  customized    Boolean @default(false)
+  customization Json?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())

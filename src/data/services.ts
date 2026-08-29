@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 
 export const services = [
-    // Website Development
     {
         id: "website-development",
         title: "Website Development",
@@ -104,9 +103,45 @@ export const services = [
         },
 
         deliveryTime: "1-3 weeks",
+
+        mcqs: [
+            {
+                id: "pages",
+                question: "How many pages do you need?",
+                options: [
+                    { label: "Up to 5 pages", value: "5", price: 0 },
+                    { label: "6-10 pages", value: "10", price: 2500 },
+                    { label: "11-20 pages", value: "20", price: 5000 },
+                    { label: "20+ pages", value: "custom", price: 10000 },
+                ],
+            },
+            {
+                id: "cms",
+                question: "Do you need a CMS to manage your content?",
+                options: [
+                    { label: "No", value: "no", price: 0 },
+                    { label: "Yes", value: "yes", price: 3000 },
+                ],
+            },
+            {
+                id: "seo",
+                question: "Do you need SEO setup?",
+                options: [
+                    { label: "Basic SEO", value: "basic", price: 0 },
+                    { label: "Advanced SEO", value: "advanced", price: 4000 },
+                ],
+            },
+            {
+                id: "forms",
+                question: "Do you need advanced forms or lead generation?",
+                options: [
+                    { label: "Basic contact form", value: "basic", price: 0 },
+                    { label: "Advanced lead generation", value: "advanced", price: 2500 },
+                ],
+            },
+        ],
     },
 
-    // Web Applications
     {
         id: "web-applications",
         title: "Web Applications",
@@ -133,7 +168,7 @@ export const services = [
             "Internal business tools",
             "Online platforms",
         ],
-        
+
         howItWorks: [
             {
                 step: 1,
@@ -196,9 +231,90 @@ export const services = [
         },
 
         deliveryTime: "2-6 weeks",
+
+        mcqs: [
+            {
+                id: "app-type",
+                question: "What type of application do you need?",
+                options: [
+                    {
+                        label: "Business Dashboard",
+                        value: "dashboard",
+                        price: 0,
+                    },
+                    {
+                        label: "CRM",
+                        value: "crm",
+                        price: 7000,
+                    },
+                    {
+                        label: "SaaS Platform",
+                        value: "saas",
+                        price: 15000,
+                    },
+                    {
+                        label: "Enterprise Application",
+                        value: "enterprise",
+                        price: 25000,
+                    },
+                ],
+            },
+            {
+                id: "authentication",
+                question: "Do you need user authentication?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 4000,
+                    },
+                ],
+            },
+            {
+                id: "admin",
+                question: "Do you need an admin dashboard?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 5000,
+                    },
+                ],
+            },
+            {
+                id: "api",
+                question: "Do you need third-party API integrations?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "1-2 integrations",
+                        value: "few",
+                        price: 4000,
+                    },
+                    {
+                        label: "3+ integrations",
+                        value: "many",
+                        price: 8000,
+                    },
+                ],
+            },
+        ],
     },
 
-    // E-Commerce
     {
         id: "ecommerce",
         title: "E-Commerce",
@@ -288,9 +404,85 @@ export const services = [
         },
 
         deliveryTime: "2-5 weeks",
+
+        mcqs: [
+            {
+                id: "products",
+                question: "How many products will your store have?",
+                options: [
+                    {
+                        label: "Up to 20 products",
+                        value: "20",
+                        price: 0,
+                    },
+                    {
+                        label: "21-100 products",
+                        value: "100",
+                        price: 4000,
+                    },
+                    {
+                        label: "101-500 products",
+                        value: "500",
+                        price: 8000,
+                    },
+                    {
+                        label: "500+ products",
+                        value: "500plus",
+                        price: 12000,
+                    },
+                ],
+            },
+            {
+                id: "payment",
+                question: "Do you need online payment integration?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 4000,
+                    },
+                ],
+            },
+            {
+                id: "inventory",
+                question: "Do you need inventory management?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 5000,
+                    },
+                ],
+            },
+            {
+                id: "accounts",
+                question: "Do customers need accounts?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 3000,
+                    },
+                ],
+            },
+        ],
     },
 
-    // AI Integration
     {
         id: "ai-integration",
         title: "AI Integration",
@@ -316,7 +508,6 @@ export const services = [
             "Marketing teams",
             "Online platforms",
         ],
-
 
         howItWorks: [
             {
@@ -380,9 +571,79 @@ export const services = [
         },
 
         deliveryTime: "1-4 weeks",
+
+        mcqs: [
+            {
+                id: "solution",
+                question: "What AI solution do you need?",
+                options: [
+                    {
+                        label: "AI Chatbot",
+                        value: "chatbot",
+                        price: 0,
+                    },
+                    {
+                        label: "AI Automation",
+                        value: "automation",
+                        price: 5000,
+                    },
+                    {
+                        label: "AI Content Generation",
+                        value: "content",
+                        price: 4000,
+                    },
+                    {
+                        label: "Custom AI Workflow",
+                        value: "custom",
+                        price: 10000,
+                    },
+                ],
+            },
+            {
+                id: "integration",
+                question: "How many systems need to be integrated?",
+                options: [
+                    {
+                        label: "None",
+                        value: "none",
+                        price: 0,
+                    },
+                    {
+                        label: "1 system",
+                        value: "one",
+                        price: 3000,
+                    },
+                    {
+                        label: "2-3 systems",
+                        value: "few",
+                        price: 6000,
+                    },
+                    {
+                        label: "4+ systems",
+                        value: "many",
+                        price: 10000,
+                    },
+                ],
+            },
+            {
+                id: "support",
+                question: "Do you need AI-powered customer support?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 4000,
+                    },
+                ],
+            },
+        ],
     },
 
-    // Data Analytics
     {
         id: "data-analytics",
         title: "Data Analytics",
@@ -466,9 +727,69 @@ export const services = [
         },
 
         deliveryTime: "1-4 weeks",
+
+        mcqs: [
+            {
+                id: "dashboard",
+                question: "What type of analytics solution do you need?",
+                options: [
+                    {
+                        label: "Basic Dashboard",
+                        value: "basic",
+                        price: 0,
+                    },
+                    {
+                        label: "Interactive Dashboard",
+                        value: "interactive",
+                        price: 4000,
+                    },
+                    {
+                        label: "Business Intelligence",
+                        value: "bi",
+                        price: 8000,
+                    },
+                ],
+            },
+            {
+                id: "sources",
+                question: "How many data sources need to be connected?",
+                options: [
+                    {
+                        label: "1 source",
+                        value: "one",
+                        price: 0,
+                    },
+                    {
+                        label: "2-3 sources",
+                        value: "few",
+                        price: 3000,
+                    },
+                    {
+                        label: "4+ sources",
+                        value: "many",
+                        price: 7000,
+                    },
+                ],
+            },
+            {
+                id: "reporting",
+                question: "Do you need automated reporting?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 4000,
+                    },
+                ],
+            },
+        ],
     },
 
-    // SEO & Branding
     {
         id: "seo-branding",
         title: "SEO & Branding",
@@ -552,9 +873,69 @@ export const services = [
         },
 
         deliveryTime: "1-4 weeks",
+
+        mcqs: [
+            {
+                id: "service",
+                question: "What do you need help with?",
+                options: [
+                    {
+                        label: "Technical SEO",
+                        value: "seo",
+                        price: 0,
+                    },
+                    {
+                        label: "Brand Identity",
+                        value: "branding",
+                        price: 3000,
+                    },
+                    {
+                        label: "UI/UX Design",
+                        value: "uiux",
+                        price: 4000,
+                    },
+                    {
+                        label: "Full Digital Presence",
+                        value: "full",
+                        price: 8000,
+                    },
+                ],
+            },
+            {
+                id: "content",
+                question: "Do you need content strategy?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 3000,
+                    },
+                ],
+            },
+            {
+                id: "marketing",
+                question: "Do you need digital marketing?",
+                options: [
+                    {
+                        label: "No",
+                        value: "no",
+                        price: 0,
+                    },
+                    {
+                        label: "Yes",
+                        value: "yes",
+                        price: 5000,
+                    },
+                ],
+            },
+        ],
     },
 
-    // Mobile Apps
     {
         id: "mobile-apps",
         title: "Mobile Apps",
@@ -579,8 +960,6 @@ export const services = [
             "Service businesses",
             "New product ideas",
         ],
-
-
 
         howItWorks: [
             {
@@ -640,6 +1019,51 @@ export const services = [
 
         deliveryTime: "Coming Soon",
         comingSoon: true,
+
+        mcqs: [
+            {
+                id: "platform",
+                question: "Which platforms do you need?",
+                options: [
+                    {
+                        label: "Android",
+                        value: "android",
+                        price: 0,
+                    },
+                    {
+                        label: "iOS",
+                        value: "ios",
+                        price: 0,
+                    },
+                    {
+                        label: "Android + iOS",
+                        value: "both",
+                        price: 5000,
+                    },
+                ],
+            },
+            {
+                id: "complexity",
+                question: "How complex is your application?",
+                options: [
+                    {
+                        label: "Simple",
+                        value: "simple",
+                        price: 0,
+                    },
+                    {
+                        label: "Medium",
+                        value: "medium",
+                        price: 7000,
+                    },
+                    {
+                        label: "Advanced",
+                        value: "advanced",
+                        price: 15000,
+                    },
+                ],
+            },
+        ],
     },
 ];
 

@@ -1,173 +1,114 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Heart, ShoppingCart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 
-import Button from "@/src/components/ui/Button";
+import ServiceCustomizationModal from "./ServiceCustomizationModal";
 
-interface ServiceActionsProps {
-  serviceId: string;
-  initialWishlisted: boolean;
-  initialAddedToCart: boolean;
+interface MCQOption {
+    label: string;
+    value: string;
+    price: number;
+}
+
+interface MCQ {
+    id: string;
+    question: string;
+    options: MCQOption[];
+}
+
+interface Props {
+    serviceId: string;
+    serviceTitle: string;
+    basePrice: number;
+    mcqs: MCQ[];
+    initialWishlisted: boolean;
+    initialAddedToCart: boolean;
 }
 
 export default function ServiceActions({
-  serviceId,
-  initialWishlisted,
-  initialAddedToCart,
-}: ServiceActionsProps) {
-  const [wishlistLoading, setWishlistLoading] = useState(false);
-  const [cartLoading, setCartLoading] = useState(false);
+    serviceId,
+    serviceTitle,
+    basePrice,
+    mcqs,
+    initialWishlisted,
+    initialAddedToCart,
+}: Props) {
+    const [wishlisted, setWishlisted] = useState(initialWishlisted);
+    const [addedToCart, setAddedToCart] = useState(initialAddedToCart);
+    const [customizeOpen, setCustomizeOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  // Initialize directly from server props.
-  // No useEffect needed.
-  const [wishlisted, setWishlisted] = useState(initialWishlisted);
-  const [addedToCart, setAddedToCart] = useState(initialAddedToCart);
+    const toggleWishlist = async () => {
+        setLoading(true);
 
-  async function toggleWishlist() {
-    if (wishlistLoading) return;
+        try {
+            const response = await fetch("/api/wishlist", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    serviceId,
+                }),
+            });
 
-    try {
-      setWishlistLoading(true);
+            if (!response.ok) {
+                return;
+            }
 
-      if (wishlisted) {
-        // REMOVE
-        const response = await fetch("/api/wishlist", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            serviceId,
-          }),
-        });
+            const data = await response.json();
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          if (response.status === 401) {
-            window.location.href = "/login";
-            return;
-          }
-
-          throw new Error(
-            data.error || "Unable to remove from wishlist.",
-          );
+            setWishlisted(Boolean(data.wishlisted));
+        } finally {
+            setLoading(false);
         }
+    };
 
-        setWishlisted(false);
-      } else {
-        // ADD
-        const response = await fetch("/api/wishlist", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            serviceId,
-          }),
-        });
+    return (
+        <>
+            <div className="flex flex-wrap gap-3">
+                <button
+                    type="button"
+                    onClick={() => setCustomizeOpen(true)}
+                    disabled={addedToCart}
+                    className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+                >
+                    <ShoppingCart size={18} />
 
-        const data = await response.json();
+                    {addedToCart
+                        ? "Customized Service in Cart"
+                        : "Customize & Add to Cart"}
+                </button>
 
-        if (!response.ok) {
-          if (response.status === 401) {
-            window.location.href = "/login";
-            return;
-          }
+                <button
+                    type="button"
+                    onClick={toggleWishlist}
+                    disabled={loading}
+                    className={`inline-flex items-center gap-2 rounded-xl border px-5 py-4 font-semibold transition ${
+                        wishlisted
+                            ? "border-red-200 bg-red-50 text-red-600"
+                            : "border-slate-200 bg-white text-slate-700 hover:border-red-200 hover:text-red-600"
+                    }`}
+                >
+                    <Heart
+                        size={18}
+                        className={wishlisted ? "fill-current" : ""}
+                    />
 
-          throw new Error(
-            data.error || "Unable to add to wishlist.",
-          );
-        }
+                    {wishlisted ? "Wishlisted" : "Wishlist"}
+                </button>
+            </div>
 
-        setWishlisted(true);
-      }
-    } catch (error) {
-      console.error("Wishlist error:", error);
-      alert("Unable to update your wishlist.");
-    } finally {
-      setWishlistLoading(false);
-    }
-  }
-
-  async function addToCart() {
-    if (cartLoading || addedToCart) return;
-
-    try {
-      setCartLoading(true);
-
-      const response = await fetch("/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          serviceId,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          window.location.href = "/login";
-          return;
-        }
-
-        throw new Error(data.error || "Unable to add to cart.");
-      }
-
-      setAddedToCart(true);
-    } catch (error) {
-      console.error("Cart error:", error);
-      alert("Unable to add this service to your cart.");
-    } finally {
-      setCartLoading(false);
-    }
-  }
-
-  return (
-    <div className="flex flex-col gap-3 sm:flex-row">
-      <Button
-        variant="outline"
-        size="lg"
-        onClick={toggleWishlist}
-        disabled={wishlistLoading}
-        className="flex-1"
-      >
-        {wishlisted ? (
-          <>
-            <Heart className="mr-2 h-5 w-5 fill-current text-pink-500" />
-            {wishlistLoading ? "Removing..." : "Saved"}
-          </>
-        ) : (
-          <>
-            <Heart className="mr-2 h-5 w-5" />
-            {wishlistLoading ? "Saving..." : "Add to Wishlist"}
-          </>
-        )}
-      </Button>
-
-      <Button
-        variant="secondary"
-        size="lg"
-        onClick={addToCart}
-        disabled={cartLoading || addedToCart}
-        className="flex-1"
-      >
-        {addedToCart ? (
-          <>
-            <Check className="mr-2 h-5 w-5" />
-            Added to Cart
-          </>
-        ) : (
-          <>
-            <ShoppingCart className="mr-2 h-5 w-5" />
-            {cartLoading ? "Adding..." : "Add to Cart"}
-          </>
-        )}
-      </Button>
-    </div>
-  );
+            <ServiceCustomizationModal
+                open={customizeOpen}
+                onClose={() => setCustomizeOpen(false)}
+                serviceId={serviceId}
+                serviceTitle={serviceTitle}
+                basePrice={basePrice}
+                mcqs={mcqs}
+                onAddedToCart={() => setAddedToCart(true)}
+            />
+        </>
+    );
 }

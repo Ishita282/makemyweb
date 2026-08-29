@@ -195,6 +195,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <div className="mt-8">
               <ServiceActions
                 serviceId={service.id}
+                serviceTitle={service.title}
+                basePrice={service.pricing.startingAt}
+                mcqs={service.mcqs}
                 initialWishlisted={initialWishlisted}
                 initialAddedToCart={initialAddedToCart}
               />

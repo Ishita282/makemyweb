@@ -10,3 +10,4 @@ export { default as Skills } from "./Skills";
 
 export { StartProjectModal } from "./StartProjectModal";
 export { default as ServiceActions } from "./ServiceActions";
+export { default as ServiceCustomizationModal } from "./ServiceCustomizationModal";

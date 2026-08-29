@@ -25,12 +25,15 @@ export default async function SavedServicesPage() {
   });
 
   const savedServices = wishlistItems
-    .map((item) => services.find((service) => service.id === item.serviceId))
-    .filter(Boolean);
+    .map((item) =>
+      services.find((service) => service.id === item.serviceId),
+    )
+    .filter((service): service is (typeof services)[number] => Boolean(service));
 
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="flex items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold text-slate-950">
@@ -51,6 +54,7 @@ export default async function SavedServicesPage() {
           </Link>
         </div>
 
+        {/* Empty State */}
         {savedServices.length === 0 ? (
           <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-10 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-pink-50 text-pink-500">
@@ -75,58 +79,60 @@ export default async function SavedServicesPage() {
             </Link>
           </div>
         ) : (
+          /* Saved Services */
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {savedServices.map((service) => {
-              if (!service) return null;
+            {savedServices.map((service) => (
+              <div
+                key={service.id}
+                className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-md"
+              >
+                {/* Image */}
+                <div className="relative h-44 overflow-hidden bg-slate-100">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
 
-              return (
-                <div
-                  key={service.id}
-                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="relative h-44 overflow-hidden bg-slate-100">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
+                {/* Content */}
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <h2 className="font-bold text-slate-950">
+                      {service.title}
+                    </h2>
+
+                    <SavedServiceHeart serviceId={service.id} />
                   </div>
 
-                  <div className="p-5">
-                    <div className="flex items-start justify-between gap-3">
-                      <h2 className="font-bold text-slate-950">
-                        {service.title}
-                      </h2>
-                      <SavedServiceHeart serviceId={service.id} />{" "}
+                  <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-500">
+                    {service.description}
+                  </p>
+
+                  <div className="mt-5 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-xs text-slate-500">
+                        Starting at
+                      </p>
+
+                      <p className="font-bold text-slate-950">
+                        ₹{service.pricing.startingAt.toLocaleString("en-IN")}
+                      </p>
                     </div>
 
-                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-500">
-                      {service.description}
-                    </p>
-
-                    <div className="mt-5 flex items-center justify-between gap-3">
-                      <div>
-                        <p className="text-xs text-slate-500">Starting at</p>
-
-                        <p className="font-bold text-slate-950">
-                          ₹{service.pricing.startingAt.toLocaleString("en-IN")}
-                        </p>
-                      </div>
-
-                      <Link
-                        href={`/services/${service.id}`}
-                        className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
-                      >
-                        View Service
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
+                    <Link
+                      href={`/services/${service.id}`}
+                      className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+                    >
+                      View Service
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         )}
       </div>
